@@ -1,0 +1,53 @@
+:root {
+  /* Brand palette */
+  --color-cream: #F7F1C7;
+  --color-red: #ED2028;
+  --color-salmon: #F4A39A;
+  --color-brown: #29211D;
+  --color-white: #FFFFFF;
+
+  /* Derived neutrals */
+  --color-red-dark: #C8141C;
+  --color-cream-soft: #FBF8E4;
+  --color-salmon-soft: #FCE6E2;
+  --color-text: var(--color-brown);
+  --color-text-muted: #6B5F57;
+  --color-border: rgba(41, 33, 29, 0.12);
+  --color-border-strong: rgba(41, 33, 29, 0.22);
+  --overlay-strong: rgba(29, 22, 18, 0.82);
+
+  /* Typography */
+  --font-heading: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --section-padding: clamp(3.5rem, 7vw, 6rem);
+
+  /* Shape & depth */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(41, 33, 29, 0.08);
+  --shadow-md: 0 8px 24px -12px rgba(41, 33, 29, 0.28);
+
+  /* Layout */
+  --container: 1200px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --header-height: 72px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (max-width: 899px) {
+  :root {
+    --header-height: 64px;
+  }
+}

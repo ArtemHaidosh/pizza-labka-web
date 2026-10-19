@@ -1,0 +1,270 @@
+.header {
+  --gingham-height: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-height);
+  /* Warm glow behind the logo fading into cream, slightly lighter toward the right */
+  background:
+    radial-gradient(420px 160% at 6% 0%, rgba(244, 163, 154, 0.55) 0%, rgba(244, 163, 154, 0) 70%),
+    linear-gradient(100deg, var(--color-cream) 0%, #FAF5D5 55%, #FCF9E6 100%);
+  transition: box-shadow 0.25s var(--ease);
+}
+
+/* Red-and-white gingham strip – the tablecloth from the logo (two rows of 5px squares) */
+.header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--gingham-height) * -1);
+  height: var(--gingham-height);
+  background-color: var(--color-white);
+  background-image:
+    linear-gradient(90deg, rgba(237, 32, 40, 0.55) 50%, transparent 50%),
+    linear-gradient(180deg, rgba(237, 32, 40, 0.55) 50%, transparent 50%);
+  background-size:
+    var(--gingham-height) 100%,
+    100% var(--gingham-height);
+  pointer-events: none;
+}
+
+.header--scrolled {
+  box-shadow: 0 10px 24px -14px rgba(41, 33, 29, 0.45);
+}
+
+.header__inner {
+  position: relative;
+  z-index: 1; /* keeps the hanging logo above the gingham strip */
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: 100%;
+}
+
+.header__tagline {
+  padding-left: var(--space-4);
+  border-left: 2px solid rgba(237, 32, 40, 0.35);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.header__tagline span {
+  color: var(--color-red);
+}
+
+/* The logo hangs slightly below the bar at the top of the page, like a badge,
+   and tucks into the bar once the visitor scrolls. */
+.header__brand {
+  position: relative;
+  flex-shrink: 0;
+  align-self: stretch;
+  width: 79px;
+  border-radius: var(--radius-sm);
+}
+
+.header__logo {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: auto;
+  height: 88px;
+  filter: drop-shadow(0 6px 10px rgba(41, 33, 29, 0.18));
+  transition: height 0.25s var(--ease);
+}
+
+.header--scrolled .header__logo {
+  height: 60px;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin-left: auto;
+}
+
+.header__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  list-style: none;
+}
+
+.header__links a {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.875rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  transition:
+    color 0.2s var(--ease),
+    background-color 0.2s var(--ease);
+}
+
+.header__links a::after {
+  content: '';
+  position: absolute;
+  left: 0.875rem;
+  right: 0.875rem;
+  bottom: 0.2rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease);
+}
+
+.header__links a:hover,
+.header__links a.is-active {
+  color: var(--color-red);
+}
+
+.header__links a:hover::after,
+.header__links a.is-active::after {
+  transform: scaleX(1);
+}
+
+.header__cta {
+  box-shadow: 0 6px 16px -8px rgba(237, 32, 40, 0.7);
+}
+
+.header__cta.is-active {
+  background: var(--color-brown);
+  box-shadow: none;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.header__toggle {
+  display: none;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 899px) {
+  .header__brand {
+    width: 65px;
+  }
+
+  .header__tagline {
+    font-size: 0.6875rem;
+    padding-left: var(--space-3);
+  }
+
+  .header__logo {
+    height: 72px;
+  }
+
+  .header--scrolled .header__logo,
+  .header--open .header__logo {
+    height: 52px;
+  }
+
+  .header__toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 48px;
+    height: 48px;
+    margin-left: auto;
+    margin-right: -8px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--color-brown);
+  }
+
+  .header__toggle-bar {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: currentColor;
+    border-radius: 2px;
+    transition:
+      transform 0.25s var(--ease),
+      opacity 0.2s var(--ease);
+  }
+
+  .header--open .header__toggle-bar:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+
+  .header--open .header__toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header--open .header__toggle-bar:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+  }
+
+  .header__nav {
+    position: absolute;
+    top: calc(100% + var(--gingham-height));
+    left: calc(var(--gutter) * -1);
+    right: calc(var(--gutter) * -1);
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-5);
+    padding: var(--space-4) var(--gutter) var(--space-6);
+    background: var(--color-cream);
+    box-shadow: var(--shadow-md);
+    max-height: calc(100dvh - var(--header-height) - var(--gingham-height));
+    overflow-y: auto;
+  }
+
+  .header--open .header__nav {
+    display: flex;
+  }
+
+  .header__links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .header__links li + li {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .header__links a {
+    padding: 0.9rem 0.25rem;
+    font-size: 1.125rem;
+    border-radius: 0;
+  }
+
+  .header__links a::after {
+    display: none;
+  }
+
+  .header__actions {
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 0;
+  }
+
+  .header__cta.is-active {
+    background: var(--color-red);
+  }
+
+  .header__actions .btn {
+    min-height: 52px;
+  }
+}

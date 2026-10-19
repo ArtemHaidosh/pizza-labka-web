@@ -1,0 +1,103 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: clamp(460px, 72vh, 640px);
+  padding-block: clamp(4.5rem, 10vw, 7rem) clamp(3.5rem, 8vw, 6rem);
+  color: var(--color-white);
+  background: var(--color-brown);
+}
+
+/* Separate, slightly scaled layer so any filter never exposes the edges. */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url('/images/pizza-background-sm.webp');
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.04);
+}
+
+@media (min-width: 760px) {
+  .hero__bg {
+    background-image: url('/images/pizza-background.webp');
+    background-position: center 40%;
+  }
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(29, 22, 18, 0.88) 0%, rgba(29, 22, 18, 0.66) 42%, rgba(29, 22, 18, 0.18) 78%, rgba(29, 22, 18, 0.08) 100%),
+    linear-gradient(0deg, rgba(29, 22, 18, 0.35) 0%, rgba(29, 22, 18, 0) 40%);
+}
+
+@media (max-width: 759px) {
+  .hero__overlay {
+    background: linear-gradient(180deg, rgba(29, 22, 18, 0.55) 0%, rgba(29, 22, 18, 0.8) 55%, rgba(29, 22, 18, 0.88) 100%);
+  }
+}
+
+.hero__content {
+  position: relative;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+}
+
+.hero__eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-red);
+}
+
+.hero__title {
+  max-width: 13ch;
+  font-size: clamp(2.5rem, 6.2vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.hero__accent {
+  color: var(--color-salmon);
+}
+
+.hero__text {
+  max-width: 34rem;
+  margin-top: var(--space-5);
+  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 479px) {
+  .hero__actions .btn {
+    flex: 1 1 100%;
+  }
+}
